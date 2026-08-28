@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+  html,body{margin:0;padding:0}
+  body{background:#f2f0ec;-webkit-font-smoothing:antialiased}
+  a{color:#a67c2d;text-decoration:none}
+  a:hover{color:#c2a04a}
+  input,textarea,button{font-family:Arial,Helvetica,sans-serif}
+  input[type=file]::file-selector-button{border:0;background:#a67c2d;color:#fff;padding:9px 14px;font-weight:900;font-size:11px;letter-spacing:2px;text-transform:uppercase;margin-right:12px;cursor:pointer}
+</style>
+</helmet>
+<div style="font-family:Arial,Helvetica,sans-serif;color:#333;background:#f2f0ec;min-height:100vh">
+
+  <div style="background:#fff;border-bottom:1px solid #e4e1da;padding:16px 28px;display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap">
+    <img src="assets/logo-hasbargen.png" alt="Immobilien Contor Hasbargen" style="height:54px;width:auto;display:block">
+    <div style="color:#111;font-size:12px;font-weight:700;letter-spacing:3px">KAISERBÄDER I <span style="color:#c2a04a">USEDOM</span></div>
+  </div>
+
+  <div style="max-width:1120px;margin:0 auto;padding:44px 22px 72px">
+    <div style="font-size:12px;letter-spacing:4px;text-transform:uppercase;color:#a67c2d;font-weight:700;margin-bottom:14px">Wohnideen-Check</div>
+    <h1 style="font-family:'Arial Black',Arial,sans-serif;font-weight:900;font-size:clamp(32px,5vw,42px);line-height:1.05;margin:0 0 12px;color:#111">Objekt anlegen, <span style="color:#a67c2d">Kundenlink</span> raus.</h1>
+    <p style="font-size:17px;line-height:27px;color:#333;max-width:700px;margin:0 0 30px">Räume mit HEUTE- und WOHNIDEE-Foto füllen, Link erzeugen, an den Kunden schicken. Der Kunde sieht nur die fertige Kundenansicht – nie diese Seite.</p>
+
+    <div style="background:#fff;padding:30px;box-shadow:0 18px 50px #00000010">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px">
+        <div>
+          <label style="display:block;font-size:11px;font-weight:900;letter-spacing:2px;text-transform:uppercase;color:#111;margin-bottom:8px">Objektname</label>
+          <input value="{{ objectName }}" onInput="{{ setObj }}" style="width:100%;padding:13px 14px;border:1px solid #ddd;background:#fff;font-size:15px" style-focus="border-color:#a67c2d;outline:none">
+        </div>
+        <div>
+          <label style="display:block;font-size:11px;font-weight:900;letter-spacing:2px;text-transform:uppercase;color:#111;margin-bottom:8px">Unterzeile</label>
+          <input value="{{ tagline }}" onInput="{{ setTag }}" style="width:100%;padding:13px 14px;border:1px solid #ddd;background:#fff;font-size:15px" style-focus="border-color:#a67c2d;outline:none">
+        </div>
+      </div>
+      <div style="margin-top:20px">
+        <label style="display:block;font-size:11px;font-weight:900;letter-spacing:2px;text-transform:uppercase;color:#111;margin-bottom:8px">Einleitung für den Kunden</label>
+        <textarea onInput="{{ setIntro }}" value="{{ intro }}" style="width:100%;min-height:96px;padding:13px 14px;border:1px solid #ddd;background:#fff;font-size:15px;line-height:24px;resize:vertical" style-focus="border-color:#a67c2d;outline:none"></textarea>
+      </div>
+
+      <sc-for list="{{ rooms }}" as="r" hint-placeholder-count="1">
+        <div style="margin-top:22px;border:1px solid #e4e1da;padding:20px;background:#fbfaf8">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:14px;margin-bottom:16px">
+            <div style="font-family:'Arial Black',Arial,sans-serif;font-weight:900;font-size:13px;letter-spacing:2px;color:#c2a04a">RAUM {{ r.num }}</div>
+            <button onClick="{{ r.remove }}" style="border:0;background:#f0ece4;color:#8a6a1f;padding:9px 14px;font-weight:900;font-size:11px;letter-spacing:2px;text-transform:uppercase;cursor:pointer" style-hover="background:#a67c2d;color:#fff">Entfernen</button>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(45%,1fr));gap:18px">
+            <div style="grid-column:1/-1">
+              <label style="display:block;font-size:11px;font-weight:900;letter-spacing:2px;text-transform:uppercase;color:#111;margin-bottom:8px">Raumname</label>
+              <input value="{{ r.name }}" onInput="{{ r.setName }}" style="width:100%;padding:13px 14px;border:1px solid #ddd;background:#fff;font-size:15px" style-focus="border-color:#a67c2d;outline:none">
+            </div>
+            <div>
+              <label style="display:block;font-size:11px;font-weight:900;letter-spacing:2px;text-transform:uppercase;color:#111;margin-bottom:8px">Heute <span style="color:{{ r.beforeColor }}">{{ r.beforeMark }}</span></label>
+              <label onDragOver="{{ allowDrop }}" onDrop="{{ r.dropBefore }}" style="display:block;cursor:pointer;border:2px dashed {{ r.beforeBorder }};background:#efece6;background-size:cover;background-position:center;background-image:{{ r.beforeBg }};height:132px;position:relative" style-hover="border-color:#a67c2d">
+                <input type="file" accept="image/*" onChange="{{ r.setBefore }}" style="position:absolute;width:1px;height:1px;opacity:0">
+                <span style="position:absolute;inset:0;display:grid;place-items:center;text-align:center;font-size:12px;font-weight:700;letter-spacing:1px;color:#8d877c;padding:10px">{{ r.beforeHint }}</span>
+              </label>
+            </div>
+            <div>
+              <label style="display:block;font-size:11px;font-weight:900;letter-spacing:2px;text-transform:uppercase;color:#111;margin-bottom:8px">Wohnidee <span style="color:{{ r.afterColor }}">{{ r.afterMark }}</span></label>
+              <label onDragOver="{{ allowDrop }}" onDrop="{{ r.dropAfter }}" style="display:block;cursor:pointer;border:2px dashed {{ r.afterBorder }};background:#efece6;background-size:cover;background-position:center;background-image:{{ r.afterBg }};height:132px;position:relative" style-hover="border-color:#a67c2d">
+                <input type="file" accept="image/*" onChange="{{ r.setAfter }}" style="position:absolute;width:1px;height:1px;opacity:0">
+                <span style="position:absolute;inset:0;display:grid;place-items:center;text-align:center;font-size:12px;font-weight:700;letter-spacing:1px;color:#8d877c;padding:10px">{{ r.afterHint }}</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </sc-for>
+
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:24px">
+        <button onClick="{{ addRoom }}" style="border:1px solid #d8cfb8;background:#fff;color:#a67c2d;padding:16px 24px;font-weight:900;font-size:12px;letter-spacing:2px;text-transform:uppercase;cursor:pointer" style-hover="border-color:#a67c2d;background:#faf6ed">+ Raum hinzufügen</button>
+        <button onClick="{{ makeLink }}" style="border:0;background:#a67c2d;color:#fff;padding:16px 26px;font-weight:900;font-size:12px;letter-spacing:2px;text-transform:uppercase;cursor:pointer" style-hover="background:#c2a04a;color:#111">Kundenlink erstellen ★</button>
+      </div>
+
+      <sc-if value="{{ status }}" hint-placeholder-val="{{ false }}">
+        <div style="margin-top:18px;font-size:14px;color:#666">{{ status }}</div>
+      </sc-if>
+
+      <sc-if value="{{ hasLink }}" hint-placeholder-val="{{ false }}">
+        <div style="margin-top:26px;border-top:1px solid #e4e1da;padding-top:24px">
+          <label style="display:block;font-size:11px;font-weight:900;letter-spacing:2px;text-transform:uppercase;color:#111;margin-bottom:8px">Öffentlicher Kundenlink</label>
+          <input readonly value="{{ url }}" style="width:100%;padding:13px 14px;border:1px solid #ddd;background:#fbfaf8;font-size:13px;color:#555">
+          <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:14px">
+            <button onClick="{{ copyLink }}" style="border:1px solid #d8cfb8;background:#fff;color:#a67c2d;padding:14px 22px;font-weight:900;font-size:12px;letter-spacing:2px;text-transform:uppercase;cursor:pointer" style-hover="border-color:#a67c2d;background:#faf6ed">Link kopieren</button>
+            <button onClick="{{ openLink }}" style="border:1px solid #d8cfb8;background:#fff;color:#a67c2d;padding:14px 22px;font-weight:900;font-size:12px;letter-spacing:2px;text-transform:uppercase;cursor:pointer" style-hover="border-color:#a67c2d;background:#faf6ed">Kundenansicht öffnen</button>
+            <a href="{{ mailtoLink }}" style="background:#a67c2d;color:#fff;padding:14px 22px;font-weight:900;font-size:12px;letter-spacing:2px;text-transform:uppercase" style-hover="background:#c2a04a;color:#111">Als Mail rausschicken ★</a>
+          </div>
+        </div>
+      </sc-if>
+    </div>
+
+    <div style="margin-top:22px;background:#fff;border-left:4px solid #c2a04a;padding:16px 20px;font-style:italic;color:#555;font-size:15px;line-height:24px">PS: Ohne Upload-Server werden die Bilder direkt in den Link gepackt – das funktioniert, macht ihn aber lang. Für den Versand an Kunden besser den Server-Upload nutzen.</div>
+  </div>
+
+  <div style="background:#fff;border-top:1px solid #e4e1da;color:#666;padding:34px 28px;font-size:13px;line-height:22px">
+    <div style="max-width:1120px;margin:0 auto;display:flex;gap:28px;flex-wrap:wrap;justify-content:space-between;align-items:flex-start">
+      <div>
+        <img src="assets/logo-hasbargen.png" alt="Immobilien Contor Hasbargen" style="height:46px;width:auto;display:block;margin-bottom:14px">
+        Seestraße 16 · 17429 Ostseebad Heringsdorf / OT Bansin<br>
+        <a href="tel:+493837880888" style="color:#a67c2d">+49 38378 80888</a> · <a href="mailto:info@immobilien-kaiserbaeder.de" style="color:#a67c2d">info@immobilien-kaiserbaeder.de</a>
+      </div>
+      <div style="color:#999;font-size:12px;max-width:280px">Drei Jahrzehnte Usedom. Lokal. Direkt. Und anders.</div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}">
+class Component extends DCLogic {
+  state = {
+    objectName: 'Villa Luna 13',
+    tagline: 'Nicht schöner fotografiert. Einfach mal weitergedacht.',
+    intro: 'Wir zeigen dir bewusst beides: wie die Wohnung heute wirklich aussieht – und was mit ein paar frischen Wohnideen daraus werden könnte. Schieb den Regler einfach hin und her und probier’s aus.',
+    rooms: [{ id: 1, name: 'Wohnzimmer', before: null, after: null, beforeUrl: '', afterUrl: '', ratio: 16 / 9 }],
+    status: '',
+    url: '',
+    busy: false
+  };
+  _n = 1;
+
+  componentDidMount() {
+    this._stop = e => { e.preventDefault(); };
+    window.addEventListener('dragover', this._stop);
+    window.addEventListener('drop', this._stop);
+  }
+  componentWillUnmount() {
+    window.removeEventListener('dragover', this._stop);
+    window.removeEventListener('drop', this._stop);
+  }
+  patch(id, upd) {
+    this.setState(s => ({ rooms: s.rooms.map(r => r.id === id ? Object.assign({}, r, upd) : r) }));
+  }
+  async pick(id, key, file) {
+    if (!file) return this.patch(id, { [key]: null, [key + 'Url']: '' });
+    const url = URL.createObjectURL(file);
+    const upd = { [key]: file, [key + 'Url']: url };
+    if (key === 'before') {
+      upd.ratio = await new Promise(ok => { const i = new Image(); i.onload = () => ok(i.naturalWidth / i.naturalHeight); i.onerror = () => ok(16 / 9); i.src = url; });
+    }
+    this.patch(id, upd);
+  }
+  shrink(file) {
+    return new Promise(ok => {
+      const url = URL.createObjectURL(file);
+      const img = new Image();
+      img.onload = () => {
+        const max = 1600, sc = Math.min(1, max / Math.max(img.naturalWidth, img.naturalHeight));
+        const c = document.createElement('canvas');
+        c.width = Math.round(img.naturalWidth * sc);
+        c.height = Math.round(img.naturalHeight * sc);
+        c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+        URL.revokeObjectURL(url);
+        ok(c.toDataURL('image/jpeg', 0.72));
+      };
+      img.onerror = () => { URL.revokeObjectURL(url); ok(''); };
+      img.src = url;
+    });
+  }
+  async upload(file) {
+    try {
+      const q = await fetch('/api/upload?filename=' + encodeURIComponent(file.name), {
+        method: 'POST', headers: { 'content-type': file.type || 'application/octet-stream' }, body: file
+      });
+      if (!q.ok) throw new Error('upload');
+      const j = await q.json();
+      if (!j || !j.url) throw new Error('upload');
+      return j.url;
+    } catch (e) {
+      return await this.shrink(file);
+    }
+  }
+
+  renderVals() {
+    const s = this.state;
+    const viewerBase = location.href.replace(/[^/]*$/, '') + 'viewer.html';
+    const mailBody = 'Moin,\n\nhier ist dein persönlicher Wohnideen-Check zu ' + s.objectName + ':\n' + s.url + '\n\nSchieb den Regler hin und her – links der heutige Zustand, rechts die Wohnidee.\n\nBeste Grüße\nImmobilien Contor Hasbargen\n+49 38378 80888';
+    return {
+      objectName: s.objectName, tagline: s.tagline, intro: s.intro, status: s.status,
+      url: s.url, hasLink: !!s.url,
+      mailtoLink: 'mailto:?subject=' + encodeURIComponent('Dein Wohnideen-Check – ' + s.objectName) + '&body=' + encodeURIComponent(mailBody),
+      allowDrop: e => { e.preventDefault(); },
+      setObj: e => this.setState({ objectName: e.target.value }),
+      setTag: e => this.setState({ tagline: e.target.value }),
+      setIntro: e => this.setState({ intro: e.target.value }),
+      addRoom: () => { this._n++; this.setState(st => ({ rooms: st.rooms.concat({ id: this._n, name: 'Weiterer Raum', before: null, after: null, beforeUrl: '', afterUrl: '', ratio: 16 / 9 }) })); },
+      rooms: s.rooms.map((r, i) => ({
+        id: r.id,
+        num: String(i + 1).padStart(2, '0'),
+        name: r.name,
+        beforeBg: r.beforeUrl ? 'url(' + r.beforeUrl + ')' : 'none',
+        afterBg: r.afterUrl ? 'url(' + r.afterUrl + ')' : 'none',
+        beforeHint: r.beforeUrl ? '' : 'Foto hierher ziehen oder klicken',
+        afterHint: r.afterUrl ? '' : 'Foto hierher ziehen oder klicken',
+        beforeBorder: r.beforeUrl ? 'transparent' : '#d8cfb8',
+        afterBorder: r.afterUrl ? 'transparent' : '#d8cfb8',
+        dropBefore: e => { e.preventDefault(); this.pick(r.id, 'before', e.dataTransfer.files[0]); },
+        dropAfter: e => { e.preventDefault(); this.pick(r.id, 'after', e.dataTransfer.files[0]); },
+        beforeMark: r.beforeUrl ? '✓' : '—',
+        afterMark: r.afterUrl ? '✓' : '—',
+        beforeColor: r.beforeUrl ? '#a67c2d' : '#bbb',
+        afterColor: r.afterUrl ? '#a67c2d' : '#bbb',
+        setName: e => this.patch(r.id, { name: e.target.value }),
+        setBefore: e => this.pick(r.id, 'before', e.target.files[0]),
+        setAfter: e => this.pick(r.id, 'after', e.target.files[0]),
+        remove: () => this.setState(st => ({ rooms: st.rooms.filter(x => x.id !== r.id) }))
+      })),
+      copyLink: async () => { try { await navigator.clipboard.writeText(s.url); this.setState({ status: 'Link kopiert.' }); } catch (e) { this.setState({ status: 'Kopieren nicht möglich – Link bitte manuell markieren.' }); } },
+      openLink: () => window.open(s.url, '_blank'),
+      makeLink: async () => {
+        if (this.state.busy) return;
+        const done = this.state.rooms.filter(r => r.before && r.after);
+        if (!done.length) return this.setState({ status: 'Bitte mindestens einen Raum mit beiden Fotos anlegen.' });
+        this.setState({ busy: true, status: 'Bilder werden vorbereitet …' });
+        try {
+          const out = [];
+          for (let i = 0; i < done.length; i++) {
+            this.setState({ status: 'Raum ' + (i + 1) + ' von ' + done.length + ' …' });
+            const [b, a] = await Promise.all([this.upload(done[i].before), this.upload(done[i].after)]);
+            out.push({ name: done[i].name, before: b, after: a, ratio: done[i].ratio });
+          }
+          const payload = { objectName: this.state.objectName, tagline: this.state.tagline, intro: this.state.intro, rooms: out };
+          const json = JSON.stringify(payload);
+          const enc = btoa(unescape(encodeURIComponent(json)));
+          if (enc.length < 900000) {
+            this.setState({ url: viewerBase + '?d=' + encodeURIComponent(enc), status: 'Fertig – Kundenlink steht.', busy: false });
+          } else {
+            const id = 'wic' + Date.now().toString(36);
+            try { localStorage.setItem(id, json); } catch (err) {}
+            this.setState({
+              url: viewerBase + '?id=' + id,
+              status: 'Fotos zu groß für einen versendbaren Link – dieser Link funktioniert nur auf diesem Rechner (zum Testen). Für den Versand an Kunden braucht es den Upload-Server.',
+              busy: false
+            });
+          }
+        } catch (e) {
+          this.setState({ status: 'Fehler: ' + (e.message || e), busy: false });
+        }
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>
