@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Wohnideen-Check – Generator Test</title>
+<style>
+*{box-sizing:border-box}
+:root{
+  --bg:#f3f3ef;
+  --card:#fff;
+  --ink:#141414;
+  --muted:#686868;
+  --line:#deded8;
+}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink)}
+.wrap{max-width:1180px;margin:0 auto;padding:28px 18px 60px}
+h1{font-size:clamp(38px,6vw,72px);line-height:.95;margin:0 0 10px}
+.lead{color:var(--muted);font-size:18px;margin:0 0 28px}
+.card{background:var(--card);border-radius:24px;padding:22px;box-shadow:0 14px 42px rgba(0,0,0,.07);margin-bottom:22px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+label{display:block;font-weight:800;margin:0 0 7px}
+input[type=text],textarea,input[type=file]{
+  width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:#fff;font:inherit
+}
+textarea{min-height:90px;resize:vertical}
+button{border:0;border-radius:12px;padding:12px 16px;font-weight:800;cursor:pointer;font:inherit}
+.primary{background:#111;color:#fff}
+.secondary{background:#ecece7;color:#111}
+.danger{background:#f3e6e6;color:#7a2020}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.small{font-size:13px;color:var(--muted)}
+.room{border:1px solid var(--line);border-radius:18px;padding:18px;margin-top:16px}
+.room-head{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:14px}
+.room-head h3{margin:0;font-size:20px}
+.preview-header{margin-bottom:24px}
+.kicker{font-size:14px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:#666;margin-bottom:8px}
+.preview-header h2{font-size:clamp(34px,5vw,58px);margin:0 0 8px}
+.preview-header .tagline{font-size:clamp(19px,2.5vw,28px);font-weight:800;margin:0 0 14px}
+.preview-header p{color:#505050;max-width:860px;font-size:17px;line-height:1.55;margin:0}
+.room-preview{margin-top:26px}
+.room-preview h3{font-size:24px;margin:0 0 12px}
+.compare{position:relative;width:100%;overflow:hidden;border-radius:20px;background:#ddd;touch-action:none;user-select:none}
+.compare img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
+.compare img.top{clip-path:inset(0 50% 0 0)}
+.slider-line{position:absolute;top:0;bottom:0;left:50%;width:3px;background:#fff;transform:translateX(-50%);box-shadow:0 0 12px rgba(0,0,0,.35)}
+.handle{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:66px;height:66px;border-radius:50%;background:#fff;display:grid;place-items:center;font-size:25px;font-weight:900;box-shadow:0 8px 28px rgba(0,0,0,.35)}
+.badge{position:absolute;top:14px;padding:9px 12px;border-radius:999px;background:rgba(0,0,0,.62);color:#fff;font-size:12px;font-weight:900;letter-spacing:.04em}
+.badge.left{left:14px}.badge.right{right:14px}
+.disclaimer{margin-top:22px;padding-top:16px;border-top:1px solid #e6e6e0;color:#777;font-size:13px;line-height:1.45}
+.empty{padding:40px;text-align:center;border:2px dashed var(--line);border-radius:18px;color:#777}
+.modebar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
+.modebar button.active{background:#111;color:white}
+.customer-only .generator-panel{display:none}
+.generator-only .customer-panel{display:none}
+@media(max-width:760px){
+  .grid{grid-template-columns:1fr}
+  .wrap{padding:16px 10px 40px}
+  .card{padding:16px;border-radius:18px}
+  .handle{width:56px;height:56px}
+}
+</style>
+</head>
+<body>
+<main class="wrap" id="app">
+  <div class="modebar">
+    <button class="secondary active" id="showGenerator">Generator</button>
+    <button class="secondary" id="showCustomer">Kundenansicht</button>
+  </div>
+
+  <section class="generator-panel">
+    <h1>Wohnideen-Check</h1>
+    <p class="lead">Interne Testversion für dich: Objekt anlegen, Räume hinzufügen, HEUTE und WOHNIDEE hochladen.</p>
+
+    <section class="card">
+      <div class="grid">
+        <div>
+          <label>Objektname</label>
+          <input id="objectName" type="text" value="Villa Luna 13">
+        </div>
+        <div>
+          <label>Unterzeile</label>
+          <input id="tagline" type="text" value="Nicht schöner fotografiert. Einfach mal weitergedacht.">
+        </div>
+      </div>
+      <div style="margin-top:16px">
+        <label>Einleitung für den Kunden</label>
+        <textarea id="intro">Wir zeigen dir bewusst beides: wie die Wohnung heute wirklich aussieht – und was mit ein paar frischen Wohnideen daraus werden könnte. Schieb den Regler einfach hin und her und probier's aus.</textarea>
+      </div>
+
+      <div id="rooms"></div>
+
+      <div class="actions">
+        <button class="secondary" id="addRoom">+ Raum hinzufügen</button>
+        <button class="primary" id="updatePreview">Kundenansicht aktualisieren</button>
+      </div>
+      <p class="small">Der Kunde sieht später nur die Kundenansicht – niemals diesen Generator.</p>
+    </section>
+  </section>
+
+  <section class="customer-panel card">
+    <div id="customerPreview">
+      <div class="empty">Noch keine vollständigen Räume vorhanden.</div>
+    </div>
+  </section>
+</main>
+
+<script>
+const app = document.getElementById('app');
+const roomsEl = document.getElementById('rooms');
+const previewEl = document.getElementById('customerPreview');
+let rooms = [];
+let roomCounter = 0;
+
+function esc(s){
+  return String(s ?? '').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+}
+
+function fileToData(file){
+  return new Promise((resolve,reject)=>{
+    const r=new FileReader();
+    r.onload=()=> {
+      const img=new Image();
+      img.onload=()=>resolve({data:r.result, ratio:img.naturalWidth/img.naturalHeight});
+      img.onerror=reject;
+      img.src=r.result;
+    };
+    r.onerror=reject;
+    r.readAsDataURL(file);
+  });
+}
+
+function addRoom(name='Wohnzimmer'){
+  roomCounter++;
+  const room = {id:roomCounter,name,before:'',after:'',ratio:16/9};
+  rooms.push(room);
+
+  const box=document.createElement('div');
+  box.className='room';
+  box.dataset.id=room.id;
+  box.innerHTML=`
+    <div class="room-head">
+      <h3>Raum ${room.id}</h3>
+      <button class="danger remove">Entfernen</button>
+    </div>
+    <div class="grid">
+      <div>
+        <label>Raumname</label>
+        <input class="roomName" type="text" value="${esc(name)}">
+      </div>
+      <div></div>
+      <div>
+        <label>HEUTE</label>
+        <input class="beforeFile" type="file" accept="image/*">
+      </div>
+      <div>
+        <label>WOHNIDEE</label>
+        <input class="afterFile" type="file" accept="image/*">
+      </div>
+    </div>`;
+  roomsEl.appendChild(box);
+
+  box.querySelector('.roomName').addEventListener('input',e=>room.name=e.target.value);
+  box.querySelector('.beforeFile').addEventListener('change',async e=>{
+    if(!e.target.files[0]) return;
+    const x=await fileToData(e.target.files[0]);
+    room.before=x.data; room.ratio=x.ratio;
+  });
+  box.querySelector('.afterFile').addEventListener('change',async e=>{
+    if(!e.target.files[0]) return;
+    const x=await fileToData(e.target.files[0]);
+    room.after=x.data;
+  });
+  box.querySelector('.remove').addEventListener('click',()=>{
+    rooms=rooms.filter(r=>r.id!==room.id);
+    box.remove();
+    renderPreview();
+  });
+}
+
+function renderPreview(){
+  const objectName=esc(document.getElementById('objectName').value||'Wohnideen-Check');
+  const tagline=esc(document.getElementById('tagline').value||'');
+  const intro=esc(document.getElementById('intro').value||'');
+  const complete=rooms.filter(r=>r.before&&r.after);
+
+  if(!complete.length){
+    previewEl.innerHTML='<div class="empty">Bitte mindestens einen Raum mit HEUTE- und WOHNIDEE-Bild vollständig anlegen.</div>';
+    return;
+  }
+
+  previewEl.innerHTML=`
+    <div class="preview-header">
+      <div class="kicker">Wohnideen-Check</div>
+      <h2>${objectName}</h2>
+      <div class="tagline">${tagline}</div>
+      <p>${intro}</p>
+    </div>
+    <div id="roomPreviews"></div>
+    <div class="disclaimer">
+      KI-Visualisierung zur Inspiration. Unter „HEUTE“ siehst du immer den tatsächlichen Zustand der Wohnung. Die Darstellung unter „WOHNIDEE“ ist eine unverbindliche Gestaltungsidee.
+    </div>`;
+
+  const container=document.getElementById('roomPreviews');
+  complete.forEach((r,i)=>{
+    const section=document.createElement('section');
+    section.className='room-preview';
+    section.innerHTML=`
+      <h3>${esc(r.name||('Raum '+(i+1)))}</h3>
+      <div class="compare" style="aspect-ratio:${r.ratio}" tabindex="0">
+        <img src="${r.after}" alt="Wohnidee">
+        <img src="${r.before}" class="top" alt="Heute">
+        <div class="slider-line"></div>
+        <div class="handle">↔</div>
+        <div class="badge left">HEUTE</div>
+        <div class="badge right">WOHNIDEE</div>
+      </div>`;
+    container.appendChild(section);
+    wireCompare(section.querySelector('.compare'));
+  });
+}
+
+function wireCompare(c){
+  const top=c.querySelector('img.top');
+  const line=c.querySelector('.slider-line');
+  const handle=c.querySelector('.handle');
+  let pos=50,drag=false;
+  const set=(x)=>{
+    const r=c.getBoundingClientRect();
+    pos=Math.max(0,Math.min(100,(x-r.left)/r.width*100));
+    top.style.clipPath=`inset(0 ${100-pos}% 0 0)`;
+    line.style.left=pos+'%';
+    handle.style.left=pos+'%';
+  };
+  c.addEventListener('pointerdown',e=>{drag=true;c.setPointerCapture(e.pointerId);set(e.clientX)});
+  c.addEventListener('pointermove',e=>{if(drag)set(e.clientX)});
+  c.addEventListener('pointerup',e=>{drag=false;try{c.releasePointerCapture(e.pointerId)}catch{}});
+  c.addEventListener('keydown',e=>{
+    if(e.key==='ArrowLeft'){pos=Math.max(0,pos-2)}
+    else if(e.key==='ArrowRight'){pos=Math.min(100,pos+2)}
+    else return;
+    top.style.clipPath=`inset(0 ${100-pos}% 0 0)`;
+    line.style.left=pos+'%';
+    handle.style.left=pos+'%';
+    e.preventDefault();
+  });
+}
+
+document.getElementById('addRoom').onclick=()=>addRoom('Weiterer Raum');
+document.getElementById('updatePreview').onclick=renderPreview;
+
+document.getElementById('showGenerator').onclick=()=>{
+  app.classList.remove('customer-only');
+  app.classList.add('generator-only');
+  document.getElementById('showGenerator').classList.add('active');
+  document.getElementById('showCustomer').classList.remove('active');
+};
+document.getElementById('showCustomer').onclick=()=>{
+  renderPreview();
+  app.classList.remove('generator-only');
+  app.classList.add('customer-only');
+  document.getElementById('showCustomer').classList.add('active');
+  document.getElementById('showGenerator').classList.remove('active');
+};
+
+addRoom('Wohnzimmer');
+app.classList.add('generator-only');
+</script>
+</body>
+</html>
