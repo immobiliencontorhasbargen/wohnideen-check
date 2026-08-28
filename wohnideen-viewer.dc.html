@@ -1,144 +1,27 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="de">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js"></script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Wohnideen-Check</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;padding:0}body{background:#f2f0ec;color:#333;font-family:Arial,Helvetica,sans-serif;-webkit-font-smoothing:antialiased}a{color:#a67c2d;text-decoration:none}.top{background:#fff;border-bottom:1px solid #e4e1da;padding:16px 28px;display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap}.brand{font-weight:900;letter-spacing:.08em;color:#111}.brand small{display:block;color:#a67c2d;letter-spacing:.2em;font-size:10px;margin-bottom:3px}.place{color:#111;font-size:12px;font-weight:700;letter-spacing:3px}.place span{color:#c2a04a}.main{max-width:1120px;margin:0 auto;padding:44px 22px 64px}.eyebrow{font-size:12px;letter-spacing:4px;text-transform:uppercase;color:#a67c2d;font-weight:700;margin-bottom:14px}h1{font-family:Arial Black,Arial,sans-serif;font-weight:900;font-size:clamp(32px,5vw,44px);line-height:1.05;margin:0 0 14px;color:#111}.tag{font-size:clamp(18px,2.4vw,22px);font-weight:900;color:#a67c2d;margin-bottom:20px;max-width:820px}.intro{font-size:17px;line-height:27px;max-width:760px;margin:0}.room{margin-top:44px}.roomhead{display:flex;align-items:baseline;gap:14px;margin-bottom:14px;flex-wrap:wrap}.num{font-family:Arial Black,Arial,sans-serif;font-weight:900;font-size:13px;color:#c2a04a;letter-spacing:2px}.room h2{font-family:Arial Black,Arial,sans-serif;font-weight:900;font-size:24px;margin:0;color:#111}.cmp{position:relative;width:100%;overflow:hidden;background:#e7e4de;touch-action:none;user-select:none;cursor:ew-resize;box-shadow:0 18px 50px #00000014;aspect-ratio:16/9}.cmp img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}.cmp .before{clip-path:inset(0 50% 0 0)}.line{position:absolute;top:0;bottom:0;left:50%;width:2px;background:#fff;transform:translateX(-50%);box-shadow:0 0 14px #0007;pointer-events:none}.handle{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:56px;height:56px;border-radius:50%;background:#fff;display:grid;place-items:center;color:#111;font-size:20px;font-weight:900;box-shadow:0 10px 30px #0006;pointer-events:none}.label{position:absolute;top:14px;padding:8px 12px;font-size:11px;font-weight:900;letter-spacing:2px;pointer-events:none;box-shadow:0 4px 14px #00000026}.label.beforelabel{left:14px;background:#fff;color:#111}.label.afterlabel{right:14px;background:#a67c2d;color:#fff}.cta{margin-top:52px;background:#fff;padding:32px;box-shadow:0 18px 50px #00000010}.cta .title{font-family:Arial Black,Arial,sans-serif;font-weight:900;font-size:26px;color:#111;margin-bottom:12px}.cta p{font-size:16px;line-height:26px;margin:0 0 22px;max-width:640px}.actions{display:flex;gap:12px;flex-wrap:wrap}.btn{padding:16px 26px;font-weight:900;font-size:13px;letter-spacing:2px;text-transform:uppercase}.primary{background:#a67c2d;color:#fff}.secondary{background:#fff;color:#a67c2d;border:1px solid #d8cfb8}.ps{margin-top:26px;background:#fff;border-left:4px solid #c2a04a;padding:16px 20px;font-style:italic;color:#555;font-size:15px;line-height:24px}.legal{margin-top:26px;padding-top:16px;border-top:1px solid #e0ddd6;color:#999;font-size:12px;line-height:20px;max-width:820px}.foot{background:#fff;border-top:1px solid #e4e1da;color:#666;padding:34px 28px;font-size:13px;line-height:22px}.footin{max-width:1120px;margin:0 auto;display:flex;gap:28px;flex-wrap:wrap;justify-content:space-between}.error{max-width:800px;margin:40px auto;background:#fff;padding:24px;border-left:4px solid #a67c2d} @media(max-width:650px){.top{padding:14px 18px}.main{padding:32px 14px 50px}.cta{padding:22px}.handle{width:48px;height:48px}}
+</style>
 </head>
 <body>
-<x-dc>
-<helmet>
-<style>
-  html,body{margin:0;padding:0}
-  body{background:#f2f0ec;-webkit-font-smoothing:antialiased}
-  a{color:#a67c2d;text-decoration:none}
-  a:hover{color:#c2a04a}
-</style>
-</helmet>
-<div style="font-family:Arial,Helvetica,sans-serif;color:#333;background:#f2f0ec;min-height:100vh;display:flex;flex-direction:column">
-
-  <div style="background:#fff;border-bottom:1px solid #e4e1da;padding:16px 28px;display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap">
-    <img src="assets/logo-hasbargen.png" alt="Immobilien Contor Hasbargen" style="height:54px;width:auto;display:block">
-    <div style="color:#111;font-size:12px;font-weight:700;letter-spacing:3px">KAISERBÄDER I <span style="color:#c2a04a">USEDOM</span></div>
-  </div>
-
-  <div style="flex:1;max-width:1120px;width:100%;margin:0 auto;padding:44px 22px 64px">
-
-    <div style="font-size:12px;letter-spacing:4px;text-transform:uppercase;color:#a67c2d;font-weight:700;margin-bottom:14px">Wohnideen-Check</div>
-    <h1 style="font-family:'Arial Black',Arial,sans-serif;font-weight:900;font-size:clamp(32px,5vw,44px);line-height:1.05;margin:0 0 14px;color:#111;text-wrap:pretty">{{ objectName }}</h1>
-    <div style="font-size:clamp(18px,2.4vw,22px);font-weight:900;color:#a67c2d;margin-bottom:20px;max-width:820px;text-wrap:pretty">{{ tagline }}</div>
-    <p style="font-size:17px;line-height:27px;color:#333;max-width:760px;margin:0;text-wrap:pretty">{{ intro }}</p>
-
-    <sc-if value="{{ isDemo }}" hint-placeholder-val="{{ false }}">
-      <div style="margin-top:24px;background:#fff;border-left:4px solid #c2a04a;padding:14px 18px;font-size:14px;color:#666">Vorschau-Modus – hier stehen später die echten Fotos des Objekts.</div>
-    </sc-if>
-
-    <sc-for list="{{ rooms }}" as="r" hint-placeholder-count="2">
-      <section style="margin-top:44px">
-        <div style="display:flex;align-items:baseline;gap:14px;margin-bottom:14px;flex-wrap:wrap">
-          <div style="font-family:'Arial Black',Arial,sans-serif;font-weight:900;font-size:13px;color:#c2a04a;letter-spacing:2px">{{ r.num }}</div>
-          <h2 style="font-family:'Arial Black',Arial,sans-serif;font-weight:900;font-size:24px;margin:0;color:#111">{{ r.name }}</h2>
-        </div>
-        <div data-cmp style="position:relative;width:100%;overflow:hidden;background:#e7e4de;touch-action:none;user-select:none;cursor:ew-resize;box-shadow:0 18px 50px #00000014;aspect-ratio:{{ r.ratio }}">
-          <sc-if value="{{ r.hasImages }}" hint-placeholder-val="{{ true }}">
-            <img src="{{ r.after }}" alt="Wohnidee" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none">
-            <img data-top src="{{ r.before }}" alt="Heute" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;clip-path:inset(0 50% 0 0)">
-          </sc-if>
-          <sc-if value="{{ r.noImages }}" hint-placeholder-val="{{ false }}">
-            <div style="position:absolute;inset:0;display:grid;place-items:center;background:#efece6;color:#b9b3a8;font-weight:900;letter-spacing:3px;font-size:13px">WOHNIDEE</div>
-            <div data-top style="position:absolute;inset:0;display:grid;place-items:center;background:#d8d4cc;color:#8d877c;font-weight:900;letter-spacing:3px;font-size:13px;clip-path:inset(0 50% 0 0)">HEUTE</div>
-          </sc-if>
-          <div data-line style="position:absolute;top:0;bottom:0;left:50%;width:2px;background:#fff;transform:translateX(-50%);box-shadow:0 0 14px #0007;pointer-events:none"></div>
-          <div data-handle style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:56px;height:56px;border-radius:50%;background:#fff;display:grid;place-items:center;color:#111;font-size:20px;font-weight:900;box-shadow:0 10px 30px #0006;pointer-events:none">↔</div>
-          <div style="position:absolute;top:14px;left:14px;padding:8px 12px;background:#fff;color:#111;font-size:11px;font-weight:900;letter-spacing:2px;pointer-events:none;box-shadow:0 4px 14px #00000026">HEUTE</div>
-          <div style="position:absolute;top:14px;right:14px;padding:8px 12px;background:#a67c2d;color:#fff;font-size:11px;font-weight:900;letter-spacing:2px;pointer-events:none;box-shadow:0 4px 14px #00000026">WOHNIDEE</div>
-        </div>
-      </section>
-    </sc-for>
-
-    <div style="margin-top:52px;background:#fff;padding:32px;box-shadow:0 18px 50px #00000010">
-      <div style="font-size:12px;letter-spacing:4px;text-transform:uppercase;color:#a67c2d;font-weight:700;margin-bottom:10px">Nächster Schritt</div>
-      <div style="font-family:'Arial Black',Arial,sans-serif;font-weight:900;font-size:26px;color:#111;margin-bottom:12px;text-wrap:pretty">Am Bildschirm ist es schön. Vor Ort <span style="color:#a67c2d">entscheidet es sich</span>.</div>
-      <p style="font-size:16px;line-height:26px;color:#333;margin:0 0 22px;max-width:640px">Sag uns einfach, welche Idee dich am meisten anspricht – den Rest klären wir bei einem Termin auf Usedom.</p>
-      <div style="display:flex;gap:12px;flex-wrap:wrap">
-        <a href="{{ mailtoTermin }}" style="background:#a67c2d;color:#fff;padding:16px 26px;font-weight:900;font-size:13px;letter-spacing:2px;text-transform:uppercase" style-hover="background:#c2a04a;color:#111">Termin sichern ★</a>
-        <a href="tel:+493837880888" style="background:#fff;color:#a67c2d;border:1px solid #d8cfb8;padding:16px 26px;font-weight:900;font-size:13px;letter-spacing:2px;text-transform:uppercase" style-hover="border-color:#a67c2d;background:#faf6ed">Kurz anrufen</a>
-      </div>
-    </div>
-
-    <div style="margin-top:26px;background:#fff;border-left:4px solid #c2a04a;padding:16px 20px;font-style:italic;color:#555;font-size:15px;line-height:24px">PS: Der Regler kostet nichts. Die Wohnung stehen zu lassen vielleicht schon.</div>
-
-    <div style="margin-top:26px;padding-top:16px;border-top:1px solid #e0ddd6;color:#999;font-size:12px;line-height:20px;max-width:820px">KI-Visualisierung zur Inspiration. Unter „HEUTE“ siehst du immer den tatsächlichen Zustand der Wohnung. Die Darstellung unter „WOHNIDEE“ ist eine unverbindliche Gestaltungsidee – keine Zusicherung von Ausstattung, Material oder Bauzustand.</div>
-  </div>
-
-  <div style="background:#fff;border-top:1px solid #e4e1da;color:#666;padding:34px 28px;font-size:13px;line-height:22px">
-    <div style="max-width:1120px;margin:0 auto;display:flex;gap:28px;flex-wrap:wrap;justify-content:space-between;align-items:flex-start">
-      <div>
-        <img src="assets/logo-hasbargen.png" alt="Immobilien Contor Hasbargen" style="height:46px;width:auto;display:block;margin-bottom:14px">
-        Seestraße 16 · 17429 Ostseebad Heringsdorf / OT Bansin<br>
-        <a href="tel:+493837880888" style="color:#a67c2d">+49 38378 80888</a> · <a href="mailto:info@immobilien-kaiserbaeder.de" style="color:#a67c2d">info@immobilien-kaiserbaeder.de</a><br>
-        <a href="https://www.immobilien-kaiserbaeder.de" style="color:#a67c2d">www.immobilien-kaiserbaeder.de</a>
-      </div>
-      <div style="color:#999;font-size:12px;max-width:280px">Drei Jahrzehnte Usedom. Lokal. Direkt. Und anders.</div>
-    </div>
-  </div>
-</div>
-</x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;objectName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Villa Luna 13&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;tagline&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Nicht schöner fotografiert. Einfach mal weitergedacht.&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;intro&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
-class Component extends DCLogic {
-  state = { data: null };
-  componentDidMount() {
-    try {
-      const d = new URLSearchParams(location.search).get('d');
-      if (d) this.setState({ data: JSON.parse(decodeURIComponent(escape(atob(d))))});
-    } catch (e) { /* ungültiger Link → Demo */ }
-    const root = this.root || document;
-    const onDown = (e) => {
-      const c = e.target.closest && e.target.closest('[data-cmp]');
-      if (!c) return;
-      const set = (x) => {
-        const r = c.getBoundingClientRect();
-        const p = Math.max(0, Math.min(100, (x - r.left) / r.width * 100));
-        const top = c.querySelector('[data-top]');
-        if (top) top.style.clipPath = 'inset(0 ' + (100 - p) + '% 0 0)';
-        c.querySelector('[data-line]').style.left = p + '%';
-        c.querySelector('[data-handle]').style.left = p + '%';
-      };
-      set(e.clientX);
-      const move = (ev) => set(ev.clientX);
-      const up = () => { window.removeEventListener('pointermove', move); window.removeEventListener('pointerup', up); };
-      window.addEventListener('pointermove', move);
-      window.addEventListener('pointerup', up);
-    };
-    document.addEventListener('pointerdown', onDown);
-    this._off = () => document.removeEventListener('pointerdown', onDown);
-  }
-  componentWillUnmount() { if (this._off) this._off(); }
-  renderVals() {
-    const p = this.state.data;
-    const demoRooms = [
-      { name: 'Wohnzimmer' }, { name: 'Schlafzimmer' }
-    ];
-    const src = p && p.rooms && p.rooms.length ? p.rooms : demoRooms;
-    const objectName = (p && p.objectName) || this.props.objectName || 'Villa Luna 13';
-    const rooms = src.map((r, i) => ({
-      num: String(i + 1).padStart(2, '0'),
-      name: r.name || ('Raum ' + (i + 1)),
-      before: r.before || '',
-      after: r.after || '',
-      ratio: Number(r.ratio) || 16 / 9,
-      hasImages: !!(r.before && r.after),
-      noImages: !(r.before && r.after)
-    }));
-    return {
-      isDemo: !p,
-      objectName,
-      tagline: (p && p.tagline) || this.props.tagline || 'Nicht schöner fotografiert. Einfach mal weitergedacht.',
-      intro: (p && p.intro) || this.props.intro || 'Wir zeigen dir bewusst beides: wie die Wohnung heute wirklich aussieht – und was mit ein paar frischen Wohnideen daraus werden könnte. Schieb den Regler einfach hin und her und probier\u2019s aus.',
-      rooms,
-      mailtoTermin: 'mailto:info@immobilien-kaiserbaeder.de?subject=' + encodeURIComponent(objectName + ' – Termin zum Wohnideen-Check') + '&body=' + encodeURIComponent('Moin,\n\nich habe mir den Wohnideen-Check zu ' + objectName + ' angesehen. Lasst uns einen Termin machen.\n\nBeste Grüße\n')
-    };
-  }
+<header class="top"><div class="brand"><small>IMMOBILIEN CONTOR</small>HASBARGEN</div><div class="place">KAISERBÄDER I <span>USEDOM</span></div></header>
+<main class="main" id="app"></main>
+<footer class="foot"><div class="footin"><div><strong>immobilien contor hasbargen</strong><br>Seestraße 16 · 17429 Ostseebad Heringsdorf / OT Bansin<br><a href="tel:+493837880888">+49 38378 80888</a> · <a href="mailto:info@immobilien-kaiserbaeder.de">info@immobilien-kaiserbaeder.de</a><br><a href="https://www.immobilien-kaiserbaeder.de">www.immobilien-kaiserbaeder.de</a></div><div style="color:#999;font-size:12px;max-width:280px">Drei Jahrzehnte Usedom. Lokal. Direkt. Und anders.</div></div></footer>
+<script>
+const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+function readData(){try{const d=new URLSearchParams(location.search).get('d');if(!d)return null;return JSON.parse(decodeURIComponent(escape(atob(d))))}catch(e){return null}}
+const data=readData(),app=document.getElementById('app');
+if(!data||!Array.isArray(data.rooms)||!data.rooms.length){app.innerHTML='<div class="error"><div class="eyebrow">Wohnideen-Check</div><h1>Dieser Link enthält noch keine Wohnideen.</h1><p>Bitte öffne einen Link, der über den Generator erstellt wurde.</p></div>'}else{
+ const objectName=data.objectName||'Wohnideen-Check';
+ app.innerHTML=`<div class="eyebrow">Wohnideen-Check</div><h1>${esc(objectName)}</h1><div class="tag">${esc(data.tagline||'Nicht schöner fotografiert. Einfach mal weitergedacht.')}</div><p class="intro">${esc(data.intro||'Wir zeigen dir bewusst beides: wie die Wohnung heute wirklich aussieht – und was mit ein paar frischen Wohnideen daraus werden könnte.')}</p><div id="rooms"></div><div class="cta"><div class="eyebrow" style="margin-bottom:10px">Nächster Schritt</div><div class="title">Am Bildschirm ist es schön. Vor Ort <span style="color:#a67c2d">entscheidet es sich</span>.</div><p>Sag uns einfach, welche Idee dich am meisten anspricht – den Rest klären wir bei einem Termin auf Usedom.</p><div class="actions"><a class="btn primary" href="mailto:info@immobilien-kaiserbaeder.de?subject=${encodeURIComponent(objectName+' – Termin zum Wohnideen-Check')}">Termin sichern ★</a><a class="btn secondary" href="tel:+493837880888">Kurz anrufen</a></div></div><div class="ps">PS: Der Regler kostet nichts. Die Wohnung stehen zu lassen vielleicht schon.</div><div class="legal">KI-Visualisierung zur Inspiration. Unter „HEUTE“ siehst du immer den tatsächlichen Zustand der Wohnung. Die Darstellung unter „WOHNIDEE“ ist eine unverbindliche Gestaltungsidee – keine Zusicherung von Ausstattung, Material oder Bauzustand.</div>`;
+ const rooms=document.getElementById('rooms');
+ data.rooms.forEach((r,i)=>{const sec=document.createElement('section');sec.className='room';const ratio=Number(r.ratio)||16/9;sec.innerHTML=`<div class="roomhead"><div class="num">${String(i+1).padStart(2,'0')}</div><h2>${esc(r.name||('Raum '+(i+1)))}</h2></div><div class="cmp" style="aspect-ratio:${ratio}"><img src="${esc(r.after)}" alt="Wohnidee"><img class="before" src="${esc(r.before)}" alt="Heute"><div class="line"></div><div class="handle">↔</div><div class="label beforelabel">HEUTE</div><div class="label afterlabel">WOHNIDEE</div></div>`;rooms.appendChild(sec)});
+ document.querySelectorAll('.cmp').forEach(c=>{const set=x=>{const r=c.getBoundingClientRect(),p=Math.max(0,Math.min(100,(x-r.left)/r.width*100));c.querySelector('.before').style.clipPath=`inset(0 ${100-p}% 0 0)`;c.querySelector('.line').style.left=p+'%';c.querySelector('.handle').style.left=p+'%'};c.addEventListener('pointerdown',e=>{e.preventDefault();set(e.clientX);const move=ev=>set(ev.clientX),up=()=>{window.removeEventListener('pointermove',move);window.removeEventListener('pointerup',up)};window.addEventListener('pointermove',move);window.addEventListener('pointerup',up)})});
 }
 </script>
 </body>
