@@ -16,23 +16,19 @@
 </style>
 </helmet>
 <div style="font-family:Arial,Helvetica,sans-serif;color:#333;background:#f2f0ec;min-height:100vh;display:flex;flex-direction:column">
-
   <div style="background:#fff;border-bottom:1px solid #e4e1da;padding:16px 28px;display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap">
     <img src="assets/logo-hasbargen.png" alt="Immobilien Contor Hasbargen" style="height:54px;width:auto;display:block">
     <div style="color:#111;font-size:12px;font-weight:700;letter-spacing:3px">KAISERBÄDER I <span style="color:#c2a04a">USEDOM</span></div>
   </div>
-
   <div style="flex:1;max-width:1120px;width:100%;margin:0 auto;padding:44px 22px 64px">
     <div style="font-size:12px;letter-spacing:4px;text-transform:uppercase;color:#a67c2d;font-weight:700;margin-bottom:14px">Wohnideen-Check</div>
     <h1 style="font-family:'Arial Black',Arial,sans-serif;font-weight:900;font-size:clamp(32px,5vw,44px);line-height:1.05;margin:0 0 14px;color:#111;text-wrap:pretty">{{ objectName }}</h1>
     <div style="font-size:clamp(18px,2.4vw,22px);font-weight:900;color:#a67c2d;margin-bottom:20px;max-width:820px;text-wrap:pretty">{{ tagline }}</div>
     <p style="font-size:17px;line-height:27px;color:#333;max-width:760px;margin:0;text-wrap:pretty">{{ intro }}</p>
-
     <sc-if value="{{ isDemo }}" hint-placeholder-val="{{ false }}"><div style="margin-top:24px;background:#fff;border-left:4px solid #c2a04a;padding:14px 18px;font-size:14px;color:#666">Vorschau-Modus – hier stehen später die echten Fotos des Objekts.</div></sc-if>
-
     <sc-for list="{{ rooms }}" as="r" hint-placeholder-count="2">
       <section style="margin-top:44px">
-        <div style="display:flex;align-items:baseline;gap:14px;margin-bottom:14px;flex-wrap:wrap"><div style="font-family:'Arial Black',Arial,sans-serif;font-weight:900;font-size:13px;color:#c2a04a;letter-spacing:2px">{{ r.num }}</div><h2 style="font-family:'Arial Black',Arial,sans-serif;font-weight:900;font-size:24px;margin:0;color:#111">{{ r.name }}</h2></div>
+        <div style="margin-bottom:14px"><h2 style="font-family:'Arial Black',Arial,sans-serif;font-weight:900;font-size:24px;margin:0;color:#111">{{ r.name }}</h2></div>
         <div data-cmp style="position:relative;width:100%;overflow:hidden;background:#e7e4de;touch-action:none;user-select:none;cursor:ew-resize;box-shadow:0 18px 50px #00000014;aspect-ratio:{{ r.ratio }}">
           <sc-if value="{{ r.hasImages }}" hint-placeholder-val="{{ true }}"><img src="{{ r.after }}" alt="Wohnidee" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none"><img data-top src="{{ r.before }}" alt="Heute" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;clip-path:inset(0 50% 0 0)"></sc-if>
           <sc-if value="{{ r.noImages }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;inset:0;display:grid;place-items:center;background:#efece6;color:#b9b3a8;font-weight:900;letter-spacing:3px;font-size:13px">WOHNIDEE</div><div data-top style="position:absolute;inset:0;display:grid;place-items:center;background:#d8d4cc;color:#8d877c;font-weight:900;letter-spacing:3px;font-size:13px;clip-path:inset(0 50% 0 0)">HEUTE</div></sc-if>
@@ -41,7 +37,6 @@
         </div>
       </section>
     </sc-for>
-
     <div style="margin-top:52px;background:#fff;padding:32px;box-shadow:0 18px 50px #00000010">
       <div style="font-size:12px;letter-spacing:4px;text-transform:uppercase;color:#a67c2d;font-weight:700;margin-bottom:10px">Nächster Schritt</div>
       <div style="font-family:'Arial Black',Arial,sans-serif;font-weight:900;font-size:26px;color:#111;margin-bottom:12px;text-wrap:pretty">Am Bildschirm ist es schön. Vor Ort <span style="color:#a67c2d">entscheidet es sich</span>.</div>
@@ -49,11 +44,9 @@
       <div style="display:flex;gap:12px;flex-wrap:wrap"><a href="{{ mailtoMehr }}" style="background:#a67c2d;color:#fff;padding:16px 26px;font-weight:900;font-size:13px;letter-spacing:2px;text-transform:uppercase" style-hover="background:#c2a04a;color:#111">Zeig mir mehr ★</a></div>
       <div style="margin-top:14px;color:#777;font-size:13px">Keine Sorge – ein Klick ist noch kein Kaufvertrag. 😉</div>
     </div>
-
     <div style="margin-top:26px;background:#fff;border-left:4px solid #c2a04a;padding:16px 20px;font-style:italic;color:#555;font-size:15px;line-height:24px">PS: Der Regler kostet nichts. Die Wohnung stehen zu lassen vielleicht schon.</div>
     <div style="margin-top:26px;padding-top:16px;border-top:1px solid #e0ddd6;color:#999;font-size:12px;line-height:20px;max-width:820px">KI-Visualisierung zur Inspiration. Unter „HEUTE“ siehst du immer den tatsächlichen Zustand der Wohnung. Die Darstellung unter „WOHNIDEE“ ist eine unverbindliche Gestaltungsidee – keine Zusicherung von Ausstattung, Material oder Bauzustand.</div>
   </div>
-
   <div style="background:#fff;border-top:1px solid #e4e1da;color:#666;padding:34px 28px;font-size:13px;line-height:22px"><div style="max-width:1120px;margin:0 auto;display:flex;gap:28px;flex-wrap:wrap;justify-content:space-between;align-items:flex-start"><div><img src="assets/logo-hasbargen.png" alt="Immobilien Contor Hasbargen" style="height:46px;width:auto;display:block;margin-bottom:14px">Seestraße 16 · 17429 Ostseebad Heringsdorf / OT Bansin<br><a href="tel:+493837880888" style="color:#a67c2d">+49 38378 80888</a> · <a href="mailto:info@immobilien-kaiserbaeder.de" style="color:#a67c2d">info@immobilien-kaiserbaeder.de</a><br><a href="https://www.immobilien-kaiserbaeder.de" style="color:#a67c2d">www.immobilien-kaiserbaeder.de</a></div><div style="color:#999;font-size:12px;max-width:280px">Drei Jahrzehnte Usedom. Lokal. Direkt. Und anders.</div></div></div>
 </div>
 </x-dc>
@@ -62,14 +55,13 @@ class Component extends DCLogic {
   state = { data: null };
   componentDidMount() {
     try { const q = new URLSearchParams(location.search); const d = q.get('d'), id = q.get('id'); if (d) this.setState({ data: JSON.parse(decodeURIComponent(escape(atob(d)))) }); else if (id) { const raw = localStorage.getItem(id); if (raw) this.setState({ data: JSON.parse(raw) }); } } catch (e) {}
-    const root = this.root || document;
     const onDown = (e) => { const c = e.target.closest && e.target.closest('[data-cmp]'); if (!c) return; const set = (x) => { const r = c.getBoundingClientRect(); const p = Math.max(0, Math.min(100, (x-r.left)/r.width*100)); const top=c.querySelector('[data-top]'); if(top) top.style.clipPath='inset(0 '+(100-p)+'% 0 0)'; c.querySelector('[data-line]').style.left=p+'%'; c.querySelector('[data-handle]').style.left=p+'%'; }; set(e.clientX); const move=(ev)=>set(ev.clientX); const up=()=>{window.removeEventListener('pointermove',move);window.removeEventListener('pointerup',up)}; window.addEventListener('pointermove',move);window.addEventListener('pointerup',up); };
     document.addEventListener('pointerdown',onDown); this._off=()=>document.removeEventListener('pointerdown',onDown);
   }
   componentWillUnmount(){if(this._off)this._off();}
   renderVals(){
     const p=this.state.data; const demoRooms=[{name:'Wohnzimmer'},{name:'Schlafzimmer'}]; const src=p&&p.rooms&&p.rooms.length?p.rooms:demoRooms; const objectName=(p&&p.objectName)||this.props.objectName||'Villa Luna 13';
-    const rooms=src.map((r,i)=>({num:String(i+1).padStart(2,'0'),name:r.name||('Raum '+(i+1)),before:r.before||'',after:r.after||'',ratio:Number(r.ratio)||16/9,hasImages:!!(r.before&&r.after),noImages:!(r.before&&r.after)}));
+    const rooms=src.map((r,i)=>({name:r.name||('Raum '+(i+1)),before:r.before||'',after:r.after||'',ratio:Number(r.ratio)||16/9,hasImages:!!(r.before&&r.after),noImages:!(r.before&&r.after)}));
     return {isDemo:!p,objectName,tagline:(p&&p.tagline)||this.props.tagline||'Nicht schöner fotografiert. Einfach mal weitergedacht.',intro:(p&&p.intro)||this.props.intro||'Wir zeigen dir bewusst beides: wie die Wohnung heute wirklich aussieht – und was mit ein paar frischen Wohnideen daraus werden könnte. Schieb den Regler einfach hin und her und probier’s aus.',rooms,mailtoMehr:'mailto:info@immobilien-kaiserbaeder.de?subject='+encodeURIComponent(objectName+' | Die Wohnideen haben mich neugierig gemacht')+'&body='+encodeURIComponent('Moin,\n\ndie Wohnideen haben mich neugierig gemacht. Zeig mir doch noch etwas mehr von der Immobilie und ruf mich gerne dazu an.\n\nBeste Grüße\n')};
   }
 }
