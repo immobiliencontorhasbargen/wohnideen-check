@@ -1,4 +1,5 @@
 const { put } = require('@vercel/blob');
+const { getVercelOidcToken } = require('@vercel/oidc');
 
 module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -14,19 +15,25 @@ module.exports = async function handler(req, res) {
     }
 
     const body = Buffer.concat(chunks);
+    const oidcToken = await getVercelOidcToken();
 
-    const options = {
-      access: 'public',
-      contentType: req.headers['content-type'] || 'application/octet-stream',
-      addRandomSuffix: true,
-      storeId: process.env.BLOB_STORE_ID,
-      oidcToken: process.env.VERCEL_OIDC_TOKEN
-    };
+    if (!oidcToken) {
+      throw new Error('Vercel OIDC token fehlt');
+    }
+    if (!process.env.BLOB_STORE_ID) {
+      throw new Error('BLOB_STORE_ID fehlt');
+    }
 
     const blob = await put(
       `wohnideen-check/${Date.now()}-${filename}`,
       body,
-      options
+      {
+        access: 'public',
+        contentType: req.headers['content-type'] || 'application/octet-stream',
+        addRandomSuffix: true,
+        storeId: process.env.BLOB_STORE_ID,
+        oidcToken
+      }
     );
 
     return res.status(200).json({ url: blob.url });
